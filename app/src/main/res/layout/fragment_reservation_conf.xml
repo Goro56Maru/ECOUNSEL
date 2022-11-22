@@ -8,10 +8,12 @@
     tools:context=".reservation.ReservationConfFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#FFFFFF"
         android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,7 +34,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:scaleType="center"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:srcCompat="?attr/actionModeCloseDrawable" />
 
             <TextView
@@ -55,7 +57,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:scaleType="center"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:srcCompat="@android:drawable/ic_popup_sync" />
         </LinearLayout>
 
@@ -64,6 +66,102 @@
             android:layout_height="match_parent"
             android:background="#00BCD4"
             android:backgroundTint="#00BCD4"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/counselor_text"
+        android:layout_width="235dp"
+        android:layout_height="30dp"
+        android:fontFamily="sans-serif"
+        android:text="カウンセラー選択"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.071" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout_avator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/counselor_text">
+
+        <ImageView
+            android:id="@+id/avator3"
+            android:layout_width="107dp"
+            android:layout_height="97dp"
+            android:layout_weight="1"
+            android:src="@drawable/img_1" />
+
+        <ImageView
+            android:id="@+id/avator2"
+            android:layout_width="107dp"
+            android:layout_height="97dp"
+            android:layout_weight="1"
+            android:src="@drawable/img_1" />
+
+        <ImageView
+            android:id="@+id/avator1"
+            android:layout_width="107dp"
+            android:layout_height="97dp"
+            android:layout_weight="1"
+            android:src="@drawable/img_1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="335dp"
+        android:layout_height="95dp"
+        android:background="@drawable/reservation_conf_border"
+        android:gravity="left"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_avator"
+        app:layout_constraintVertical_bias="0.05">
+
+        <TextView
+            android:id="@+id/counselor_name"
+            android:layout_width="349dp"
+            android:layout_height="26dp"
+            android:background="@drawable/underline"
+            android:textColor="@color/black"
+            android:text=" 鈴木カウンセラー"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/counselor_hobby"
+            android:layout_width="349dp"
+            android:layout_height="26dp"
+            android:textColor="@color/black"
+            android:text=" 趣味：読書"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/counselor_one_word"
+            android:layout_width="349dp"
+            android:layout_height="26dp"
+            android:text=" 一言：気軽に話しましょう"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
