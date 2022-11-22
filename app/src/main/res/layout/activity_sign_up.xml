@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".login.SignUpActivity">
 
-    <LinearLayout
+        <LinearLayout
         android:id="@+id/Top_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#FFFFFF"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/text1"
+        app:layout_constraintBottom_toTopOf="@+id/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -43,7 +43,7 @@
                 android:layout_weight="15"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="タイトル"
+                android:text="新規登録"
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -68,211 +68,155 @@
             android:orientation="vertical"></LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="氏名"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.104"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Top_bar" />
+
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/name"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:hint="ECC太郎"
-        app:endIconMode="clear_text"
-        app:layout_constraintTop_toBottomOf="@+id/text1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@drawable/account"
-        tools:ignore="MissingConstraints">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name_text"
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:inputType="textEmailAddress"
-            android:textSize="15dp"
-            android:background="@drawable/textboxframe"/>
+    android:id="@+id/name"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:layout_marginTop="60dp"
+    app:endIconMode="clear_text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/Top_bar"
+    app:startIconDrawable="@drawable/account"
+    tools:ignore="MissingConstraints">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/name_text"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/textboxframe"
+        android:hint="氏名"
+        android:inputType="text"
+        android:textSize="15dp" />
     </com.google.android.material.textfield.TextInputLayout>
-
-
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="氏名(カナ)"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/name_kana"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:drawableStart="@drawable/account"
-        android:hint="イーシーシータロウ"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text2"
-        app:startIconDrawable="@drawable/account">
+    android:id="@+id/name_kana"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginTop="28dp"
+    android:layout_marginEnd="40dp"
+    android:drawableStart="@drawable/account"
+    android:hint="シメイ"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/name"
+    app:startIconDrawable="@drawable/account">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name_kana_text"
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:inputType="textPassword"
-            android:textSize="15dp"
-            android:background="@drawable/textboxframe"/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/name_kana_text"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:inputType="text"
+        android:textSize="15dp"
+        android:background="@drawable/textboxframe"/>
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/text3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Eメールアドレス"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.148"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_kana" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mail"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:drawableStart="@drawable/email"
-        android:hint="ecctaro@ecc.ac.jp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text3"
-        app:startIconDrawable="@drawable/email">
+    android:id="@+id/mail"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:layout_marginTop="28dp"
+    android:drawableStart="@drawable/email"
+    android:hint="Eメールアドレス"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/name_kana"
+    app:startIconDrawable="@drawable/email">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/mail_text"
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:inputType="textEmailAddress"
-            android:textSize="15dp"
-            android:background="@drawable/textboxframe"/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/mail_text"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:inputType="textEmailAddress"
+        android:textSize="15dp"
+        android:background="@drawable/textboxframe"/>
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/text4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="パスワード"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.117"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mail" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/pass"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:drawableStart="@drawable/lock"
-        android:hint="パスワードを入力してください"
-        app:endIconMode="password_toggle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text4"
-        app:startIconDrawable="@drawable/lock">
+    android:id="@+id/pass"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:layout_marginTop="28dp"
+    android:drawableStart="@drawable/lock"
+    android:hint="パスワードを入力してください"
+    app:endIconMode="password_toggle"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/mail"
+    app:startIconDrawable="@drawable/lock">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pass_text"
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:inputType="textPassword"
-            android:textSize="15dp"
-            android:background="@drawable/textboxframe"/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/pass_text"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:inputType="textPassword"
+        android:textSize="15dp"
+        android:background="@drawable/textboxframe"/>
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/text5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="パスワード(確認)"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pass" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/again_pass"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="40dp"
         android:drawableStart="@drawable/lock"
-        android:hint="パスワードを入力してください"
+        android:hint="パスワードを再入力してください"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text5"
+        app:layout_constraintTop_toBottomOf="@+id/pass"
         app:startIconDrawable="@drawable/lock">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/again_pass_text"
             android:layout_width="match_parent"
-            android:layout_height="49dp"
+            android:layout_height="55dp"
+            android:background="@drawable/textboxframe"
             android:inputType="textPassword"
-            android:textSize="15dp"
-            android:background="@drawable/textboxframe"/>
+            android:textSize="15dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/text6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="すでにアカウントを持っている方は"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.365"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/again_pass" />
+    android:id="@+id/text6"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="すでにアカウントを持っている方は"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.365"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/again_pass" />
 
     <TextView
-        android:id="@+id/text7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:text="こちら"
-        android:textColor="#00BCD4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/again_pass" />
+    android:id="@+id/text7"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="64dp"
+    android:text="こちら"
+    android:textColor="#00BCD4"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/again_pass" />
 
     <Button
-        android:id="@+id/loginbutton"
-        android:layout_width="131dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#00BCD4"
-        android:text="新規登録"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text6" />
-
-
+    android:id="@+id/loginbutton"
+    android:layout_width="131dp"
+    android:layout_height="45dp"
+    android:layout_marginTop="20dp"
+    android:backgroundTint="#00BCD4"
+    android:text="新規登録"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/text6" />>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
