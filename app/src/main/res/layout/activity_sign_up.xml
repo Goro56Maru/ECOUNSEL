@@ -6,4 +6,217 @@
     android:layout_height="match_parent"
     tools:context=".login.SignUpActivity">
 
+        <LinearLayout
+        android:id="@+id/Top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="5dp"
+            android:background="#00BCD4"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:scaleType="center"
+                android:visibility="invisible"
+                app:srcCompat="?attr/actionModeCloseDrawable" />
+
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="新規登録"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/update_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:scaleType="center"
+                android:visibility="invisible"
+                app:srcCompat="@android:drawable/ic_popup_sync" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00BCD4"
+            android:backgroundTint="#00BCD4"
+            android:orientation="vertical"></LinearLayout>
+    </LinearLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/name"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:layout_marginTop="60dp"
+    app:endIconMode="clear_text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/Top_bar"
+    app:startIconDrawable="@drawable/account"
+    tools:ignore="MissingConstraints">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/name_text"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/textboxframe"
+        android:hint="氏名"
+        android:inputType="text"
+        android:textSize="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/name_kana"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginTop="28dp"
+    android:layout_marginEnd="40dp"
+    android:drawableStart="@drawable/account"
+    android:hint="シメイ"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/name"
+    app:startIconDrawable="@drawable/account">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/name_kana_text"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:inputType="text"
+        android:textSize="15dp"
+        android:background="@drawable/textboxframe"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/mail"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:layout_marginTop="28dp"
+    android:drawableStart="@drawable/email"
+    android:hint="Eメールアドレス"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/name_kana"
+    app:startIconDrawable="@drawable/email">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/mail_text"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:inputType="textEmailAddress"
+        android:textSize="15dp"
+        android:background="@drawable/textboxframe"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/pass"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:layout_marginTop="28dp"
+    android:drawableStart="@drawable/lock"
+    android:hint="パスワードを入力してください"
+    app:endIconMode="password_toggle"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/mail"
+    app:startIconDrawable="@drawable/lock">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/pass_text"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:inputType="textPassword"
+        android:textSize="15dp"
+        android:background="@drawable/textboxframe"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/again_pass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="40dp"
+        android:drawableStart="@drawable/lock"
+        android:hint="パスワードを再入力してください"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pass"
+        app:startIconDrawable="@drawable/lock">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/again_pass_text"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/textboxframe"
+            android:inputType="textPassword"
+            android:textSize="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+    android:id="@+id/text6"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="すでにアカウントを持っている方は"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.365"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/again_pass" />
+
+    <TextView
+    android:id="@+id/text7"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="64dp"
+    android:text="こちら"
+    android:textColor="#00BCD4"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/again_pass" />
+
+    <Button
+    android:id="@+id/loginbutton"
+    android:layout_width="131dp"
+    android:layout_height="45dp"
+    android:layout_marginTop="20dp"
+    android:backgroundTint="#00BCD4"
+    android:text="新規登録"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/text6" />>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
