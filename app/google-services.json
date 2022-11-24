@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "972940913555",
+    "project_id": "ecounsel-8619b",
+    "storage_bucket": "ecounsel-8619b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972940913555:android:c94a8655f7a6ba08ecd666",
+        "android_client_info": {
+          "package_name": "ecc.ie3a.suitou.ecounsel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972940913555-j15jsmuf83iq6kpfpstcj6cjfhala206.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbQTXAmHHvd4GcWfVRAaaK3LCpmRaT7gM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "972940913555-j15jsmuf83iq6kpfpstcj6cjfhala206.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
