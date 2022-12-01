@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="15dp"
-        android:text="現在の名前"
+        android:text="名前"
         android:textColor="#000000"
         android:textSize="20sp" />
 
