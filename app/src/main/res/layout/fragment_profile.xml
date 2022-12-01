@@ -45,7 +45,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:src="@drawable/account"
-                    app:srcCompat="@drawable/icon" />
+                    app:srcCompat="@drawable/mypage" />
 
                 <ImageView
                     android:id="@+id/margin2"
@@ -69,7 +69,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.4"
                         android:gravity="bottom"
-                        android:text="ECC 太郎"
+                        android:text="ECC 太郎(仮)"
                         android:textColor="#FFFFFF"
                         android:textSize="34sp"
                         android:textStyle="bold" />
@@ -80,20 +80,11 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.6"
                         android:gravity="top"
-                        android:text="ecctaro@ecc.ac.jp"
+                        android:text="ecctaro@ecc.ac.jp(仮)"
                         android:textColor="#FFFFFF"
                         android:textSize="20sp" />
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/margin3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.1"
-                    android:scaleType="center"
-                    android:visibility="invisible"
-                    app:srcCompat="@android:drawable/ic_popup_sync" />
             </LinearLayout>
 
             <LinearLayout
@@ -113,36 +104,151 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/parsonal_set"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
-                android:text="現在の名前"
+                android:text="基本情報の変更"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="25dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/name_change"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="0.9"
-                    android:text="TextView"
+                    android:text="名前の変更"
+                    android:textColor="#CB000000"
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/name_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.1"
-                    android:text="▶" />
+                    android:text="▶"
+                    android:textColor="#CB000000" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/id_change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.9"
+                    android:text="IDの変更"
+                    android:textColor="#CB000000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/id_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="▶"
+                    android:textColor="#CB000000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/pass_change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.9"
+                    android:text="パスワードの変更"
+                    android:textColor="#CB000000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/pass_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="▶"
+                    android:textColor="#CB000000" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/acount_set"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="50dp"
+                android:text="アカウント"
+                android:textColor="#000000"
+                android:textSize="25dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.9"
+                    android:text="ログアウト"
+                    android:textColor="#CB000000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/logout_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="▶"
+                    android:textColor="#CB000000" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/withdrawal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.9"
+                    android:text="退会"
+                    android:textColor="#CB000000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/withdrawal_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="▶"
+                    android:textColor="#CB000000" />
+
             </LinearLayout>
 
         </LinearLayout>
