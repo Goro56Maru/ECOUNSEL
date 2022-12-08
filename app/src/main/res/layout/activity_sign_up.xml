@@ -209,14 +209,14 @@
     app:layout_constraintTop_toBottomOf="@+id/again_pass" />
 
     <Button
-    android:id="@+id/signupbutton"
-    android:layout_width="131dp"
-    android:layout_height="45dp"
-    android:layout_marginTop="20dp"
-    android:backgroundTint="#00BCD4"
-    android:text="新規登録"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/text6" />>
+        android:id="@+id/signupbutton"
+        android:layout_width="131dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#00BCD4"
+        android:text="新規登録"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
