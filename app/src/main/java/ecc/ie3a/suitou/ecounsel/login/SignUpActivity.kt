@@ -12,8 +12,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import ecc.ie3a.suitou.ecounsel.MainActivity
-import ecc.ie3a.suitou.ecounsel.R
 import ecc.ie3a.suitou.ecounsel.SelectActivity
 import ecc.ie3a.suitou.ecounsel.databinding.ActivitySignUpBinding
 
@@ -29,7 +27,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivitySignUpBinding
 
-    //private val db = Firebase.firestore
+    private val db = Firebase.firestore
 
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
@@ -87,16 +85,18 @@ class SignUpActivity : AppCompatActivity() {
 
 
                     val userdata = hashMapOf(
-                        "expenditure" to 0 ,
-                        "income" to 0 ,
-                        "users" to arrayListOf<String>()
+                        "group" to "wyKJsGPFwUEjaVIuNfap" ,
+                        "mail" to remail ,
+                        "name" to name ,
+                        "name_k" to name_kana
                     )
 
-//                    db.collection("user")
-//                        .document(ruid).set(userdata)
-//                        .addOnSuccessListener { documentReference ->
-//                            Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ")
-//                        }
+                    Toast.makeText(applicationContext, "$ruid", Toast.LENGTH_SHORT).show()
+                    db.collection("users")
+                        .document(ruid).set(userdata)
+                        .addOnSuccessListener { documentReference ->
+                            Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ")
+                        }
 
                     updateUI(user)
                 } else {
@@ -110,7 +110,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         if(user != null){
-            Toast.makeText(applicationContext, "ログイン成功！ UID = $ruid", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(applicationContext, "ログイン成功！ UID = $ruid", Toast.LENGTH_SHORT).show()
             startActivity(Intent(applicationContext, SelectActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
 //            startActivity(Intent(applicationContext,useradd::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
         }else{
