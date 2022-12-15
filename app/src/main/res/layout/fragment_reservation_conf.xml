@@ -221,7 +221,8 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:visibility="visible" />
+                    android:visibility="visible"
+                    android:onClick="onCheckboxClicked"/>
 
                 <CheckBox
                     android:id="@+id/school"
@@ -230,7 +231,8 @@
                     android:text="学業進路"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:onClick="onCheckboxClicked"/>
 
                 <CheckBox
                     android:id="@+id/home_enviroment"
@@ -239,7 +241,8 @@
                     android:text="家庭環境"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:onClick="onCheckboxClicked"/>
 
                 <CheckBox
                     android:id="@+id/mental_health"
@@ -248,7 +251,8 @@
                     android:text="心身・健康"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:onClick="onCheckboxClicked"/>
 
                 <CheckBox
                     android:id="@+id/others"
@@ -260,7 +264,7 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <TextView
+            <EditText
                 android:id="@+id/otherComment"
                 android:layout_width="355dp"
                 android:layout_height="106dp"
