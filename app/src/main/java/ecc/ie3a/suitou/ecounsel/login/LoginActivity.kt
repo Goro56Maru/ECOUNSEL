@@ -40,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
             reload()
         }
 
+        //ログインボタンが押されたとき
         binding.loginbutton.setOnClickListener {
             email1 = binding.emailText.text.toString()
             pass1 = binding.passText.text.toString()
@@ -51,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        //アカウント作成ボタンが押されたとき
         binding.registerButton.setOnClickListener {
 
             val intent = Intent(this, SignUpActivity::class.java)
