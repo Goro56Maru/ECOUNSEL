@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/select_navigation"
+    app:startDestination="@id/reservationStatusFragment">
+
+    <fragment
+        android:id="@+id/profileTabFragment"
+        android:name="ecc.ie3a.suitou.ecounsel.ProfileTabFragment"
+        android:label="fragment_profile_tab"
+        tools:layout="@layout/fragment_profile_tab" >
+        <action
+            android:id="@+id/action_profileTabFragment_to_reservationStatusFragment"
+            app:destination="@id/reservationStatusFragment" />
+        <action
+            android:id="@+id/action_profileTabFragment_to_reservationTabFragment"
+            app:destination="@id/reservationTabFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reservationTabFragment"
+        android:name="ecc.ie3a.suitou.ecounsel.ReservationTabFragment"
+        android:label="fragment_reservation_tab"
+        tools:layout="@layout/fragment_reservation_tab" >
+        <action
+            android:id="@+id/action_reservationTabFragment_to_profileTabFragment"
+            app:destination="@id/profileTabFragment" />
+        <action
+            android:id="@+id/action_reservationTabFragment_to_reservationStatusFragment"
+            app:destination="@id/reservationStatusFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reservationStatusFragment"
+        android:name="ecc.ie3a.suitou.ecounsel.reservation_status.ReservationStatusFragment"
+        android:label="fragment_reservation_status"
+        tools:layout="@layout/fragment_reservation_status" >
+        <action
+            android:id="@+id/action_reservationStatusFragment_to_profileTabFragment"
+            app:destination="@id/profileTabFragment" />
+        <action
+            android:id="@+id/action_reservationStatusFragment_to_reservationTabFragment"
+            app:destination="@id/reservationTabFragment" />
+    </fragment>
+</navigation>
