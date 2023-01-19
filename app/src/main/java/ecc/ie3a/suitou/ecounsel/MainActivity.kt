@@ -28,10 +28,6 @@ class MainActivity : AppCompatActivity() {
         val viewPager = binding.viewPager2
         val tabLayout = binding.tabLayout
 
-        val number = intent.getStringExtra("num")?.toInt()
-
-        Toast.makeText(applicationContext, number.toString(), Toast.LENGTH_LONG).show()
-
         val adapter = MainPagerAdapter(supportFragmentManager, lifecycle)
         viewPager.adapter = adapter
 

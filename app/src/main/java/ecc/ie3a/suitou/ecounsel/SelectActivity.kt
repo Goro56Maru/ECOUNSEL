@@ -25,7 +25,6 @@ class SelectActivity : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             fragmentselect=0
-            intent.putExtra("num","0")
             startActivity(intent)
         }
 
@@ -33,7 +32,6 @@ class SelectActivity : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             fragmentselect=1
-            intent.putExtra("num","1")
             startActivity(intent)
         }
 
@@ -41,7 +39,6 @@ class SelectActivity : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             fragmentselect=2
-            intent.putExtra("num","2")
             startActivity(intent)
         }
 
@@ -49,7 +46,6 @@ class SelectActivity : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             fragmentselect=3
-            intent.putExtra("num","3")
             startActivity(intent)
         }
 
