@@ -1,167 +1,286 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".reservation.ReservationConfFragment">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#FFFFFF"
-        android:orientation="vertical"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="5dp"
-            android:background="#00BCD4"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/back_button"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:scaleType="center"
-                android:visibility="visible"
-                app:srcCompat="?attr/actionModeCloseDrawable" />
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#00BCD4"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/back_button"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:scaleType="center"
+                        android:visibility="visible"
+                        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+                    <TextView
+                        android:id="@+id/title_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="15"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="予約確認"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/update_button"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:scaleType="center"
+                        android:visibility="visible"
+                        app:srcCompat="@android:drawable/ic_popup_sync" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00BCD4"
+                    android:backgroundTint="#00BCD4"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/title_text"
+                android:id="@+id/counsel_choice_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:gravity="center|top"
+                android:text="カウンセラー選択"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout_avator"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="15"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:text="予約確認"
-                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/avator3"
+                    android:layout_width="107dp"
+                    android:layout_height="97dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/img_1" />
+
+                <ImageView
+                    android:id="@+id/avator2"
+                    android:layout_width="107dp"
+                    android:layout_height="97dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/img_1" />
+
+                <ImageView
+                    android:id="@+id/avator1"
+                    android:layout_width="107dp"
+                    android:layout_height="97dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/img_1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_introduction"
+                android:layout_width="335dp"
+                android:layout_height="95dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/reservation_conf_border"
+                android:gravity="left"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/counselor_name"
+                    android:layout_width="349dp"
+                    android:layout_height="26dp"
+                    android:background="@drawable/underline"
+                    android:text=" 鈴木カウンセラー"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/counselor_hobby"
+                    android:layout_width="349dp"
+                    android:layout_height="26dp"
+                    android:text=" 趣味：読書"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/counselor_one_word"
+                    android:layout_width="349dp"
+                    android:layout_height="26dp"
+                    android:text=" 一言：気軽に話しましょう"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/day_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="13dp"
+                android:text="日時"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/day"
+                android:layout_width="337dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/reservation_conf_border"
+                android:text="11月24日(木)11:00~12:00"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/counsel_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:text="相談内容" />
+
+            <TextView
+                android:id="@+id/counsel_text2"
+                android:layout_width="304dp"
+                android:layout_height="53dp"
+                android:layout_gravity="center"
+                android:text="該当する項目にチェックを入れてください(複数回答可)"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/update_button"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+            <LinearLayout
+                android:id="@+id/check_text"
+                android:layout_width="307dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:scaleType="center"
-                android:visibility="visible"
-                app:srcCompat="@android:drawable/ic_popup_sync" />
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <CheckBox
+                    android:id="@+id/friend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="友人関係"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    android:onClick="onCheckboxClicked"/>
+
+                <CheckBox
+                    android:id="@+id/school"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="学業進路"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:onClick="onCheckboxClicked"/>
+
+                <CheckBox
+                    android:id="@+id/home_enviroment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="家庭環境"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:onClick="onCheckboxClicked"/>
+
+                <CheckBox
+                    android:id="@+id/mental_health"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="心身・健康"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:onClick="onCheckboxClicked"/>
+
+                <CheckBox
+                    android:id="@+id/others"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="その他"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/otherComment"
+                android:layout_width="355dp"
+                android:layout_height="106dp"
+                android:layout_gravity="center"
+                android:background="@drawable/reservation_conf_border" />
+
+            <Button
+                android:id="@+id/reservation_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="予約する"
+                android:textColor="@color/white"
+                android:backgroundTint="#00BCD4" />
+
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00BCD4"
-            android:backgroundTint="#00BCD4"
-            android:orientation="vertical">
-
-        </LinearLayout>
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/counselor_text"
-        android:layout_width="235dp"
-        android:layout_height="30dp"
-        android:fontFamily="sans-serif"
-        android:text="カウンセラー選択"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.071" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout_avator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/counselor_text">
-
-        <ImageView
-            android:id="@+id/avator3"
-            android:layout_width="107dp"
-            android:layout_height="97dp"
-            android:layout_weight="1"
-            android:src="@drawable/img_1" />
-
-        <ImageView
-            android:id="@+id/avator2"
-            android:layout_width="107dp"
-            android:layout_height="97dp"
-            android:layout_weight="1"
-            android:src="@drawable/img_1" />
-
-        <ImageView
-            android:id="@+id/avator1"
-            android:layout_width="107dp"
-            android:layout_height="97dp"
-            android:layout_weight="1"
-            android:src="@drawable/img_1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="335dp"
-        android:layout_height="95dp"
-        android:background="@drawable/reservation_conf_border"
-        android:gravity="left"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout_avator"
-        app:layout_constraintVertical_bias="0.05">
-
-        <TextView
-            android:id="@+id/counselor_name"
-            android:layout_width="349dp"
-            android:layout_height="26dp"
-            android:background="@drawable/underline"
-            android:textColor="@color/black"
-            android:text=" 鈴木カウンセラー"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/counselor_hobby"
-            android:layout_width="349dp"
-            android:layout_height="26dp"
-            android:textColor="@color/black"
-            android:text=" 趣味：読書"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/counselor_one_word"
-            android:layout_width="349dp"
-            android:layout_height="26dp"
-            android:text=" 一言：気軽に話しましょう"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

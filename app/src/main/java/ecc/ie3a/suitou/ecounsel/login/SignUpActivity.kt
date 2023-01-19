@@ -5,18 +5,20 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import ecc.ie3a.suitou.ecounsel.MainActivity
-import ecc.ie3a.suitou.ecounsel.R
+import ecc.ie3a.suitou.ecounsel.SelectActivity
 import ecc.ie3a.suitou.ecounsel.databinding.ActivitySignUpBinding
 
 
 private var ruid = ""
+private var name = ""
+private var name_kana = ""
 private var remail = ""
 private var rpass = ""
 private var rpass2 = ""
@@ -25,7 +27,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivitySignUpBinding
 
-    //private val db = Firebase.firestore
+    private val db = Firebase.firestore
 
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
@@ -39,16 +41,20 @@ class SignUpActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         binding.signupbutton.setOnClickListener {
+            name = binding.nameText.text.toString()
+            name_kana = binding.nameKanaText.text.toString()
             remail = binding.mailText.text.toString()
             rpass = binding.passText.text.toString()
             rpass2 = binding.againPassText.text.toString()
 
-            //メールアドレスもしくはパスワードが入力されているときのみアカウント登録
-            if (remail.isNullOrEmpty() || rpass.isNullOrEmpty() || rpass2.isNullOrEmpty()) {
+            //項目が入力されているかのチェック
+            if (name.isNullOrEmpty() || name_kana.isNullOrEmpty() || remail.isNullOrEmpty() || rpass.isNullOrEmpty() || rpass2.isNullOrEmpty()) {
                 Toast.makeText(applicationContext, "メールアドレスとパスワードを入力してください", Toast.LENGTH_SHORT).show()
             } else {
-                //入力された再確認パスワードが正しいか、入力されたパスワードが6文字以上かチェック
-                if (rpass != rpass2) {
+                //正しいメールアドレスかどうか、再確認パスワードが一致しているか、入力されたパスワードが6文字以上かチェック
+                if(!mailValidation(remail)) {
+                    Toast.makeText(applicationContext, "正しいメールアドレスを入力してください", Toast.LENGTH_SHORT).show()
+                }else if(rpass != rpass2) {
                     Toast.makeText(applicationContext, "入力されたパスワードが異なります。", Toast.LENGTH_SHORT).show()
                 }else if(rpass.length < 6){
                     Toast.makeText(applicationContext, "パスワードは6文字以上です。", Toast.LENGTH_SHORT).show()
@@ -59,6 +65,11 @@ class SignUpActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    //メールアドレスの正規表現
+    private fun mailValidation(text: String) : Boolean {
+        return text.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(text).matches()
     }
 
     //アカウント作成
@@ -74,16 +85,18 @@ class SignUpActivity : AppCompatActivity() {
 
 
                     val userdata = hashMapOf(
-                        "expenditure" to 0 ,
-                        "income" to 0 ,
-                        "users" to arrayListOf<String>()
+                        "group" to "wyKJsGPFwUEjaVIuNfap" ,
+                        "mail" to remail ,
+                        "name" to name ,
+                        "name_k" to name_kana
                     )
 
-//                    db.collection("user")
-//                        .document(ruid).set(userdata)
-//                        .addOnSuccessListener { documentReference ->
-//                            Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ")
-//                        }
+                    Toast.makeText(applicationContext, "$ruid", Toast.LENGTH_SHORT).show()
+                    db.collection("users")
+                        .document(ruid).set(userdata)
+                        .addOnSuccessListener { documentReference ->
+                            Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ")
+                        }
 
                     updateUI(user)
                 } else {
@@ -97,8 +110,8 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         if(user != null){
-            Toast.makeText(applicationContext, "ログイン成功！ UID = $ruid", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(applicationContext, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
+//            Toast.makeText(applicationContext, "ログイン成功！ UID = $ruid", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(applicationContext, SelectActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
 //            startActivity(Intent(applicationContext,useradd::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
         }else{
             signOut()
