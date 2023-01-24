@@ -15,8 +15,6 @@ val TabArray = arrayOf("予約","予約状況","マイページ","チャット")
 
 class MainActivity : AppCompatActivity() {
 
-    private var hairetu= arrayOf(ReservationTabFragment(),ReservationStatusFragment(),ProfileTabFragment(),ChatFragment())
-
     private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,10 +26,6 @@ class MainActivity : AppCompatActivity() {
         val viewPager = binding.viewPager2
         val tabLayout = binding.tabLayout
 
-        val number = intent.getStringExtra("num")?.toInt()
-
-        Toast.makeText(applicationContext, number.toString(), Toast.LENGTH_LONG).show()
-
         val adapter = MainPagerAdapter(supportFragmentManager, lifecycle)
         viewPager.adapter = adapter
 
@@ -40,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         }.attach()
 
         viewPager.setCurrentItem(fragmentselect, false)
+        
+        viewPager.isUserInputEnabled = false
 
     }
 

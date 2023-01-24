@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import ecc.ie3a.suitou.ecounsel.R
+import ecc.ie3a.suitou.ecounsel.databinding.FragmentMailChangeBinding
+import ecc.ie3a.suitou.ecounsel.databinding.FragmentNameChangeBinding
+import ecc.ie3a.suitou.ecounsel.databinding.FragmentPasswordChangeBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,6 +21,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PasswordChangeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+
+//追加　
+private lateinit var binding: FragmentPasswordChangeBinding
+
 class PasswordChangeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -28,14 +37,24 @@ class PasswordChangeFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_password_change, container, false)
+
+        //遷移追加
+        binding = FragmentPasswordChangeBinding.inflate(layoutInflater)
+        val view = binding.root
+
+
+        binding.passBackbutton.setOnClickListener{
+            findNavController().navigate(R.id.action_passwordChangeFragment_to_profileFragment)
+        }
+
+        return view
     }
 
     companion object {
