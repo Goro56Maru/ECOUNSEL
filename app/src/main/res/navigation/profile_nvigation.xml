@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_nvigation"
+    app:startDestination="@id/profileFragment">
+
+    <fragment
+        android:id="@+id/mailChangeFragment"
+        android:name="ecc.ie3a.suitou.ecounsel.mypage.MailChangeFragment"
+        android:label="fragment_mail_change"
+        tools:layout="@layout/fragment_mail_change" >
+        <action
+            android:id="@+id/action_mailChangeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nameChangeFragment"
+        android:name="ecc.ie3a.suitou.ecounsel.mypage.NameChangeFragment"
+        android:label="fragment_name_change"
+        tools:layout="@layout/fragment_name_change" >
+        <action
+            android:id="@+id/action_nameChangeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ecc.ie3a.suitou.ecounsel.mypage.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_mailChangeFragment"
+            app:destination="@id/mailChangeFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_passwordChangeFragment"
+            app:destination="@id/passwordChangeFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_nameChangeFragment"
+            app:destination="@id/nameChangeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwordChangeFragment"
+        android:name="ecc.ie3a.suitou.ecounsel.mypage.PasswordChangeFragment"
+        android:label="fragment_password_change"
+        tools:layout="@layout/fragment_password_change" >
+        <action
+            android:id="@+id/action_passwordChangeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+</navigation>
