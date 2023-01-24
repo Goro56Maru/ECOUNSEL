@@ -15,8 +15,6 @@ val TabArray = arrayOf("予約","予約状況","マイページ","チャット")
 
 class MainActivity : AppCompatActivity() {
 
-    private var hairetu= arrayOf(ReservationTabFragment(),ReservationStatusFragment(),ProfileTabFragment(),ChatFragment())
-
     private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         }.attach()
 
         viewPager.setCurrentItem(fragmentselect, false)
+        
+        viewPager.isUserInputEnabled = false
 
     }
 
