@@ -12,6 +12,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import androidx.navigation.fragment.findNavController
+import ecc.ie3a.suitou.ecounsel.R
 import ecc.ie3a.suitou.ecounsel.databinding.FragmentNameChangeBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,6 +26,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [NameChangeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+//追加　
+private lateinit var binding: FragmentNameChangeBinding
+
+
 class NameChangeFragment : Fragment() {
 
     private val db = Firebase.firestore
@@ -44,6 +51,7 @@ class NameChangeFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
     }
 
     override fun onCreateView(
@@ -91,6 +99,10 @@ class NameChangeFragment : Fragment() {
                 )
 //                Update_name(name, name_kana)
             }
+        }
+
+        binding.backButton2.setOnClickListener{
+            findNavController().navigate(R.id.action_nameChangeFragment_to_profileFragment)
         }
 
         return view

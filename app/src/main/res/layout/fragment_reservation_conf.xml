@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".reservation.ReservationConfFragment">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -222,7 +221,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:visibility="visible"
-                    android:onClick="onCheckboxClicked"/>
+                    />
 
                 <CheckBox
                     android:id="@+id/school"
@@ -232,7 +231,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:onClick="onCheckboxClicked"/>
+                    />
 
                 <CheckBox
                     android:id="@+id/home_enviroment"
@@ -242,7 +241,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:onClick="onCheckboxClicked"/>
+                    />
 
                 <CheckBox
                     android:id="@+id/mental_health"
@@ -252,7 +251,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:onClick="onCheckboxClicked"/>
+                    />
 
                 <CheckBox
                     android:id="@+id/others"

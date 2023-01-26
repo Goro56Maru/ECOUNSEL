@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reservation_navigation"
+    app:startDestination="@id/reservationFragment">
+
+    <fragment
+        android:id="@+id/reservationFragment"
+        android:name="ecc.ie3a.suitou.ecounsel.reservation.ReservationFragment"
+        android:label="fragment_reservation"
+        tools:layout="@layout/fragment_reservation" >
+        <action
+            android:id="@+id/action_reservationFragment_to_reservationconfFragment"
+            app:destination="@id/reservationconfFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reservationconfFragment"
+        android:name="ecc.ie3a.suitou.ecounsel.reservation.ReservationConfFragment"
+        android:label="fragment_reservation"
+        tools:layout="@layout/fragment_reservation_conf" >
+        <action
+            android:id="@+id/action_reservationconfFragment_to_reservationFragment"
+            app:destination="@id/reservationFragment" />
+    </fragment>
+</navigation>
