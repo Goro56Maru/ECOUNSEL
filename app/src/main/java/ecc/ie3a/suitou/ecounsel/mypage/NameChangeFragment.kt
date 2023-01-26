@@ -27,9 +27,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 
-//追加　
-private lateinit var binding: FragmentNameChangeBinding
-
 
 class NameChangeFragment : Fragment() {
 
@@ -68,9 +65,8 @@ class NameChangeFragment : Fragment() {
         userRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    binding.usernameEdit.hint = document.data?.get("name").toString()
+                    binding.username.hint = document.data?.get("name").toString()
                     binding.userkana.hint = document.data?.get("name_k").toString()
-                    Toast.makeText(context,"${document.data?.get("name")}", Toast.LENGTH_LONG).show()
                 } else {
                     Log.d(TAG, "No such document")
                 }
@@ -79,11 +75,6 @@ class NameChangeFragment : Fragment() {
                 Log.d(TAG, "get failed with ", exception)
             }
 
-        if(currentUser != null){
-            Toast.makeText(context,"${userRef}", Toast.LENGTH_LONG).show()
-            Toast.makeText(context,"${currentUser.uid}", Toast.LENGTH_SHORT).show()
-            Toast.makeText(context,"ログイン成功！", Toast.LENGTH_SHORT).show()
-        }
 
         //変更ボタンが押されたとき
         binding.changeButton.setOnClickListener {
@@ -97,6 +88,7 @@ class NameChangeFragment : Fragment() {
                     "name", name,
                     "name_k", name_kana
                 )
+                Toast.makeText(context, "名前を変更しました", Toast.LENGTH_SHORT).show()
 //                Update_name(name, name_kana)
             }
         }

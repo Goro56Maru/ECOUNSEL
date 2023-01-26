@@ -31,8 +31,7 @@ class SplashActivity : AppCompatActivity() {
             //既にログインしたことがある時ホームに遷移
             // Initialize Firebase Auth
             auth = Firebase.auth
-            //消す
-            signOut()
+
             val currentUser = auth.currentUser
             if(currentUser != null){
                 updateUI(currentUser)

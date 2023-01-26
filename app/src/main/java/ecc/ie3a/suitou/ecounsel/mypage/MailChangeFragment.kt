@@ -1,13 +1,21 @@
 package ecc.ie3a.suitou.ecounsel.mypage
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import ecc.ie3a.suitou.ecounsel.R
 import ecc.ie3a.suitou.ecounsel.databinding.FragmentMailChangeBinding
+import ecc.ie3a.suitou.ecounsel.databinding.FragmentNameChangeBinding
 import ecc.ie3a.suitou.ecounsel.databinding.FragmentProfileBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,15 +29,19 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 
-//追加　
-private lateinit var binding: FragmentMailChangeBinding
-
 
 
 class MailChangeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+
+    private val db = Firebase.firestore
+    private var _binding: FragmentMailChangeBinding? = null
+    private val binding get() = _binding!!
+    private var mail = ""
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,10 +56,39 @@ class MailChangeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        //遷移追加
-        binding = FragmentMailChangeBinding.inflate(layoutInflater)
+        _binding = FragmentMailChangeBinding.inflate(inflater, container, false)
         val view = binding.root
+        auth = Firebase.auth
+        val currentUser = auth.currentUser
+        val userRef = db.collection("users").document("${currentUser?.uid}")
+
+        //firestoreから名前とカナを取得してhintとして挿入する
+        userRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    binding.mail.hint = document.data?.get("mail").toString()
+                } else {
+                    Log.d(ContentValues.TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "get failed with ", exception)
+            }
+
+
+        binding.button2.setOnClickListener {
+            mail = binding.mailEdit.text.toString()
+
+            if (mail.isNullOrEmpty()) {
+                Toast.makeText(context, "未入力項目があります", Toast.LENGTH_SHORT).show()
+            } else {
+                userRef.update(
+                    "mail", mail,
+                )
+                Toast.makeText(context, "メールを変更しました", Toast.LENGTH_SHORT).show()
+//                Update_name(name, name_kana)
+            }
+        }
 
         binding.mailBackbutton.setOnClickListener{
             findNavController().navigate(R.id.action_mailChangeFragment_to_profileFragment)
