@@ -8,7 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="ecc.ie3a.suitou.ecounsel.reservation.ReservationFragment"
+        android:name="ecc.ie3a.suitou.ecounsel.reservation.ReservationConfFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
