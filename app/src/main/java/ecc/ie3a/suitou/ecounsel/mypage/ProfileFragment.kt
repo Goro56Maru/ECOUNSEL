@@ -1,7 +1,9 @@
 package ecc.ie3a.suitou.ecounsel.mypage
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import ecc.ie3a.suitou.ecounsel.ProfileTabFragment
 import ecc.ie3a.suitou.ecounsel.R
@@ -27,6 +30,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
 
+    private val db = Firebase.firestore
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -37,6 +41,25 @@ class ProfileFragment : Fragment() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
         }
+
+
+        val userRef = db.collection("users").document("${currentUser?.uid}")
+
+        //firestoreから名前とカナを取得してhintとして挿入する
+        userRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    binding.namePro.text = document.data?.get("name").toString()
+                    binding.emailPro.text= document.data?.get("mail").toString()
+                } else {
+                    Log.d(ContentValues.TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "get failed with ", exception)
+            }
+
+
 
         binding.name.setOnClickListener{
             findNavController().navigate(R.id.action_profileFragment_to_nameChangeFragment)
