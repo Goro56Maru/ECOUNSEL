@@ -32,7 +32,7 @@ class SplashActivity : AppCompatActivity() {
             // Initialize Firebase Auth
             auth = Firebase.auth
             //消す
-            signOut()
+            //signOut()
             val currentUser = auth.currentUser
             if(currentUser != null){
                 updateUI(currentUser)

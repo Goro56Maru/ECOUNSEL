@@ -6,4 +6,5 @@ data class Schedule_Data(
     var Time: String,
     var Possible: Boolean,
     var Select_Counselor: String,
+    var Time_Only: String
 )
