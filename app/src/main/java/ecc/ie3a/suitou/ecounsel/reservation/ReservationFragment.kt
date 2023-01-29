@@ -164,7 +164,7 @@ class ReservationFragment : Fragment() {
             for (i in timeList){
                 var str = date + i
                 var setList: Schedule_Data
-                Toast.makeText(activity,"$str", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(activity,"$str", Toast.LENGTH_SHORT).show()
                 if(ReservationData.any{ it.TimeStamp == str }){
                     setList = Schedule_Data(i, false, selectCounselor,i)
                 }
