@@ -55,7 +55,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:scaleType="center"
-                android:visibility="visible"
+                android:visibility="invisible"
                 app:srcCompat="@android:drawable/ic_popup_sync" />
         </LinearLayout>
 
@@ -85,7 +85,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp"
                 android:gravity="center|top"
-                android:text="カウンセラー選択"
+                android:text="担当者"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:elevation="1dp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/calendarView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +118,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:background="@drawable/underline"
-                    android:text=" 鈴木カウンセラー"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -143,7 +142,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:text="読書"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -169,7 +167,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:text="気軽に話しましょう"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -196,7 +193,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp"
                 android:background="@drawable/reservation_conf_border"
-                android:text="11月24日(木)11:00~12:00"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="24sp"

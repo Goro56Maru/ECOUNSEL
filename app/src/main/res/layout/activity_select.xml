@@ -53,8 +53,9 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:scaleType="center"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:srcCompat="@android:drawable/ic_popup_sync" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -66,9 +67,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/Reservation_Status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/border"
         android:orientation="vertical">
 
@@ -79,33 +84,46 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="5sp"
+            android:layout_marginBottom="2dp"
             android:text="予約状況"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/Status_Text"
+            android:id="@+id/counselor_Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginBottom="10dp"
-            android:text="現在の予約はありません"
+            android:layout_marginBottom="2dp"
+            android:text="予約はありません"
             android:textAlignment="center"
             android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/counselor_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp">
+        android:layout_height="300dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="50dp">
 
         <Button
             android:id="@+id/reservation_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:backgroundTint="#00BCD4"
             android:gravity="center"
             android:text="　 予約 　"
@@ -122,8 +140,9 @@
         <Button
             android:id="@+id/mypage_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:backgroundTint="#00BCD4"
             android:gravity="center"
             android:text="マイページ"
@@ -146,6 +165,7 @@
             android:gravity="center"
             android:text="予約状況"
             android:textSize="20sp"
+            android:visibility="gone"
             app:cornerRadius="30dp"
             app:icon="@drawable/reservation_status"
             app:iconGravity="textTop"
@@ -164,6 +184,7 @@
             android:gravity="center"
             android:text="チャット"
             android:textSize="20sp"
+            android:visibility="gone"
             app:cornerRadius="30dp"
             app:icon="@drawable/chat"
             app:iconGravity="textTop"

@@ -1,11 +1,22 @@
 package ecc.ie3a.suitou.ecounsel.reservation_status
 
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ecc.ie3a.suitou.ecounsel.R
+import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import ecc.ie3a.suitou.ecounsel.databinding.FragmentReservationStatusBinding
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,9 +29,20 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ReservationStatusFragment : Fragment() {
+
+    private var _binding: FragmentReservationStatusBinding? = null
+    private val binding get() = _binding!!
+
+    //firestore
+    private val db = Firebase.firestore
+    private lateinit var auth: FirebaseAuth
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private var ReservationData : MutableList<Reservation_Status_Data> = ArrayList()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +52,140 @@ class ReservationStatusFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reservation_status, container, false)
+        _binding = FragmentReservationStatusBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        binding.infoText.visibility = LinearLayout.INVISIBLE
+        binding.day.visibility = android.widget.TextView.INVISIBLE
+        binding.consaltation.visibility = android.widget.TextView.INVISIBLE
+        binding.otherComment.visibility = android.widget.TextView.INVISIBLE
+        binding.dayText.visibility = android.widget.TextView.INVISIBLE
+        binding.counselText2.visibility = android.widget.TextView.INVISIBLE
+
+        //ログインユーザの情報の取得
+        auth = Firebase.auth
+        val currentUser = auth.currentUser
+        var uid:String
+
+        if (currentUser != null) uid = currentUser.uid
+        else uid = ""
+
+        binding.counselorText.text = "現在の予約はありません"
+        ReservationData.clear()
+        db.collection("reservation").whereEqualTo("subscriber",uid).get().addOnSuccessListener {
+            for (i in it){
+                val df = SimpleDateFormat("yyyy/MM/dd/HH:mm")
+                val date_str = i.data["timestamp"]as String
+                val dt = df.parse(date_str)
+                var setList = Reservation_Status_Data(i.id,i.data["counselor"]as String,dt,i.data["consaltation"]as String,i.data["remarks"]as String)
+                ReservationData.add(setList)
+            }
+            ReservationData.sortBy { it.TimeStamp }
+            Log.d("TAG", "結果")
+            Log.d("TAG", "$ReservationData")
+            val localDateTime = LocalDateTime.now()
+            val date = Date()
+            for (i in ReservationData){
+                Log.d("TAG", "とおてるよ")
+                Log.d("TAG", "${i.TimeStamp}")
+                Log.d("TAG", "$date")
+                if (date.before(i.TimeStamp) ){
+                    var weekList = arrayListOf<String>("(日)","(月)","(火)","(水)","(木)","(金)","(土)")
+                    Log.d("TAG", "とおてるよ")
+                    val calendar: Calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tokyo"), Locale.JAPAN)
+                    calendar.time = i.TimeStamp
+                    val year = calendar.get(Calendar.YEAR)
+                    val month = calendar.get(Calendar.MONTH)
+                    val dayOfMonth = calendar.get(Calendar.DATE)
+                    val select_week = calendar.get(Calendar.DAY_OF_WEEK) - 1
+                    val text_date = "${year}年 ${month+1}月 ${dayOfMonth}日 ${weekList[select_week]} "
+                    db.collection("counselor").document(i.CounselorID).get().addOnSuccessListener { it ->
+                        val df = SimpleDateFormat("yyyy年 MM月 dd日 HH:mm")
+                        binding.counselorText.text = "担当者：" + it["name"] as String
+                        binding.day.text = text_date
+                        binding.consaltation.text = i.consaltation
+                        binding.otherComment.text = i.remarks
+
+                        binding.infoText.visibility = LinearLayout.VISIBLE
+                        binding.day.visibility = android.widget.TextView.VISIBLE
+                        binding.consaltation.visibility = android.widget.TextView.VISIBLE
+                        binding.otherComment.visibility = android.widget.TextView.VISIBLE
+                        binding.dayText.visibility = android.widget.TextView.VISIBLE
+                        binding.counselText2.visibility = android.widget.TextView.VISIBLE
+                    }.addOnFailureListener {
+
+                    }
+                    break
+                }
+            }
+            binding.infoText.visibility = LinearLayout.VISIBLE
+        }
+
+        binding.updateButton.setOnClickListener {
+            binding.infoText.visibility = LinearLayout.INVISIBLE
+            binding.day.visibility = android.widget.TextView.INVISIBLE
+            binding.consaltation.visibility = android.widget.TextView.INVISIBLE
+            binding.otherComment.visibility = android.widget.TextView.INVISIBLE
+            binding.dayText.visibility = android.widget.TextView.INVISIBLE
+            binding.counselText2.visibility = android.widget.TextView.INVISIBLE
+
+            binding.counselorText.text = "現在の予約はありません"
+            ReservationData.clear()
+            db.collection("reservation").whereEqualTo("subscriber",uid).get().addOnSuccessListener {
+                for (i in it){
+                    val df = SimpleDateFormat("yyyy/MM/dd/HH:mm")
+                    val date_str = i.data["timestamp"]as String
+                    val dt = df.parse(date_str)
+                    var setList = Reservation_Status_Data(i.id,i.data["counselor"]as String,dt,i.data["consaltation"]as String,i.data["remarks"]as String)
+                    ReservationData.add(setList)
+                }
+                ReservationData.sortBy { it.TimeStamp }
+                Log.d("TAG", "結果")
+                Log.d("TAG", "$ReservationData")
+                val localDateTime = LocalDateTime.now()
+                val date = Date()
+                for (i in ReservationData){
+                    Log.d("TAG", "とおてるよ")
+                    Log.d("TAG", "${i.TimeStamp}")
+                    Log.d("TAG", "$date")
+                    if (date.before(i.TimeStamp) ){
+                        var weekList = arrayListOf<String>("(日)","(月)","(火)","(水)","(木)","(金)","(土)")
+                        Log.d("TAG", "とおてるよ")
+                        val calendar: Calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tokyo"), Locale.JAPAN)
+                        calendar.time = i.TimeStamp
+                        val year = calendar.get(Calendar.YEAR)
+                        val month = calendar.get(Calendar.MONTH)
+                        val dayOfMonth = calendar.get(Calendar.DATE)
+                        val select_week = calendar.get(Calendar.DAY_OF_WEEK) - 1
+                        val text_date = "${year}年 ${month+1}月 ${dayOfMonth}日 ${weekList[select_week]} "
+                        db.collection("counselor").document(i.CounselorID).get().addOnSuccessListener { it ->
+                            val df = SimpleDateFormat("yyyy年 MM月 dd日 HH:mm")
+                            binding.counselorText.text = "担当者：" + it["name"] as String
+                            binding.day.text = text_date
+                            binding.consaltation.text = i.consaltation
+                            binding.otherComment.text = i.remarks
+
+                            binding.day.visibility = android.widget.TextView.VISIBLE
+                            binding.infoText.visibility = LinearLayout.VISIBLE
+                            binding.consaltation.visibility = android.widget.TextView.VISIBLE
+                            binding.otherComment.visibility = android.widget.TextView.VISIBLE
+                            binding.dayText.visibility = android.widget.TextView.VISIBLE
+                            binding.counselText2.visibility = android.widget.TextView.VISIBLE
+                        }.addOnFailureListener {
+
+                        }
+                        break
+                    }
+                }
+                binding.infoText.visibility = LinearLayout.VISIBLE
+            }
+        }
+        return view
     }
 
     companion object {

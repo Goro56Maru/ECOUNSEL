@@ -31,8 +31,11 @@ import kotlin.collections.HashMap
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 var SELECT_COUNSELOR = ""
+var SELECT_COUNSELOR_NAME = ""
 var SELECT_DATE = ""
 var SELECT_DATE_TEXT = ""
+var SELECT_COUNSELOR_HOBBY = ""
+var SELECT_COUNSELOR_WORD = ""
 
 class ReservationConfFragment : Fragment() {
     private var param1: String? = null
@@ -67,10 +70,18 @@ class ReservationConfFragment : Fragment() {
         else uid = ""
 
         var select_counselor = ""
-        //前画面でカウンセラーが選択されていた場合反映する
-        if (!SELECT_COUNSELOR.isNullOrEmpty()){
-            select_counselor = SELECT_COUNSELOR
-        }
+        var hobby = ""
+        var word = ""
+        var select_counselor_name = ""
+
+        select_counselor = SELECT_COUNSELOR
+        select_counselor_name = SELECT_COUNSELOR_NAME
+        hobby = SELECT_COUNSELOR_HOBBY
+        word = SELECT_COUNSELOR_WORD
+
+        binding.counselorName.text = select_counselor_name
+        binding.counselorHobby.text = hobby
+        binding.counselorOneWord.text = word
         var select_date = SELECT_DATE
 
         val checkbox = arrayOf(
@@ -90,9 +101,18 @@ class ReservationConfFragment : Fragment() {
 
         //予約ボタンが押されたとき
         binding.reservationButton.setOnClickListener{
+            var bool = false
+            for (i in checkbox.indices) {
+                if (checkbox[i].isChecked) {
+                    bool = true
+                    break
+                }
+            }
             if (select_counselor.isNullOrEmpty()){
                 Toast.makeText(activity,"カウンセラーを選択してください", Toast.LENGTH_SHORT).show()
-            } else{
+            }else if(!bool){
+                Toast.makeText(activity,"相談内容の項目にチェックを入れてください", Toast.LENGTH_SHORT).show()
+            }else{
                 //チェックされたテキストの内容を配列に追加
                 for (i in checkbox.indices) {
                     if (checkbox[i].isChecked) {
@@ -120,10 +140,12 @@ class ReservationConfFragment : Fragment() {
                     .addOnSuccessListener { documentReference ->
                         Log.d(ContentValues.TAG, "予約データを追加しました")
                         //選択されたリストのID
-                        Toast.makeText(activity,"予約しました\n担当者：$select_counselor \n日程：$select_date", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity,"予約しました", Toast.LENGTH_SHORT).show()
                         SELECT_DATE = ""
                         SELECT_DATE_TEXT = ""
                         SELECT_COUNSELOR = ""
+                        SELECT_COUNSELOR_WORD = ""
+                        SELECT_COUNSELOR_HOBBY = ""
                         findNavController().navigate(ecc.ie3a.suitou.ecounsel.R.id.action_reservationconfFragment_to_reservationFragment)
                     }
                     .addOnFailureListener { e ->
@@ -136,6 +158,8 @@ class ReservationConfFragment : Fragment() {
             SELECT_COUNSELOR = ""
             SELECT_DATE = ""
             SELECT_DATE_TEXT = ""
+            SELECT_COUNSELOR_WORD = ""
+            SELECT_COUNSELOR_HOBBY = ""
             findNavController().navigate(ecc.ie3a.suitou.ecounsel.R.id.action_reservationconfFragment_to_reservationFragment)
         }
 

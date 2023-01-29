@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.TranslateAnimation
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.view.marginBottom
@@ -49,8 +50,10 @@ class ReservationFragment : Fragment() {
     private var timeList = arrayListOf<String>("9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00")
     private var weekList = arrayListOf<String>("(日)","(月)","(火)","(水)","(木)","(金)","(土)")
 
-
+    private var counselor_hobby = ""
+    private var counselor_word = ""
     private var selectCounselor = ""
+    private var selectCounselor_name = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -100,6 +103,8 @@ class ReservationFragment : Fragment() {
         binding.calendarView.maxDate = calendar.timeInMillis
 
         binding.calendarView.visibility = android.widget.CalendarView.INVISIBLE
+        binding.linearLayoutIntroduction.visibility = LinearLayout.INVISIBLE
+        binding.CounselorView.visibility = LinearLayout.INVISIBLE
 
         //Firebaseに接続し、カウンセラーの情報を取得する
         db.collection("counselor").whereEqualTo("group","wyKJsGPFwUEjaVIuNfap").get().addOnSuccessListener {
@@ -117,6 +122,7 @@ class ReservationFragment : Fragment() {
                 }
                 binding.progressBar3.visibility = android.widget.ProgressBar.INVISIBLE
                 binding.CounselorView.visibility = android.widget.ListView.VISIBLE
+                binding.linearLayoutIntroduction.visibility = android.widget.LinearLayout.VISIBLE
                 binding.calendarView.visibility = android.widget.CalendarView.VISIBLE
             }.addOnFailureListener {
                 Toast.makeText(activity,"データベース接続に失敗しました。", Toast.LENGTH_SHORT).show()
@@ -142,12 +148,14 @@ class ReservationFragment : Fragment() {
 
             //カウンセラーが選択されていなかった場合
             if (selectCounselor.isNullOrEmpty()){
-                for (i in ListView){
-                    val map = i.work[select_week]
-                    if(map["boolean"] as Boolean) {
-                        bool = true
-                    }
-                }
+                Toast.makeText(activity,"カウンセラーを選択してください" , Toast.LENGTH_SHORT).show()
+
+//                for (i in ListView){
+//                    val map = i.work[select_week]
+//                    if(map["boolean"] as Boolean) {
+//                        bool = true
+//                    }
+//                }
             //カウンセラーが選択されていた場合
             }else{
                 for (i in ListView){
@@ -158,30 +166,32 @@ class ReservationFragment : Fragment() {
                         }
                     }
                 }
-            }
 
-            //予約時間の表示
-            for (i in timeList){
-                var str = date + i
-                var setList: Schedule_Data
+                //予約時間の表示
+                for (i in timeList){
+                    var str = date + i
+                    var setList: Schedule_Data
 //                Toast.makeText(activity,"$str", Toast.LENGTH_SHORT).show()
-                if(ReservationData.any{ it.TimeStamp == str }){
-                    setList = Schedule_Data(i, false, selectCounselor,i)
+                    if(ReservationData.any{ it.TimeStamp == str }){
+                        setList = Schedule_Data(i, false, selectCounselor,i)
+                    }
+                    else{
+                        setList = Schedule_Data(i, bool, selectCounselor,i)
+                    }
+                    //データを挿入
+                    ScheduleView.add(setList)
                 }
-                else{
-                    setList = Schedule_Data(i, bool, selectCounselor,i)
-                }
-                //データを挿入
-                ScheduleView.add(setList)
-            }
-            adapter2.notifyDataSetChanged()
+                adapter2.notifyDataSetChanged()
 
-            binding.CounselorView.visibility = android.widget.ListView.INVISIBLE
-            ObjectAnimator.ofFloat(view2, "translationY", -list_height.toFloat()).apply {
-                duration = 500
-                start()
+                binding.CounselorView.visibility = android.widget.ListView.INVISIBLE
+                ObjectAnimator.ofFloat(view2, "translationY", -list_height.toFloat()).apply {
+                    duration = 500
+                    start()
+                }
+                binding.CounselorView.visibility = android.widget.ListView.INVISIBLE
+                binding.calendarView.visibility = android.widget.CalendarView.INVISIBLE
+                binding.linearLayoutIntroduction.visibility = LinearLayout.INVISIBLE
             }
-            binding.calendarView.visibility = android.widget.CalendarView.INVISIBLE
         }
 
         //時間表示の閉じるボタンが押された時
@@ -192,6 +202,7 @@ class ReservationFragment : Fragment() {
                 start()
             }
             //カレンダーを再表示
+            binding.linearLayoutIntroduction.visibility = LinearLayout.VISIBLE
             binding.calendarView.visibility = android.widget.CalendarView.VISIBLE
             binding.CounselorView.visibility = android.widget.ListView.VISIBLE
             //時間表示をリセット
@@ -204,12 +215,33 @@ class ReservationFragment : Fragment() {
             override fun onItemClickListener(view: View, position: Int, clickedText: Counselor_Data) {
                 if (selectCounselor == clickedText.CounselorID){
                     selectCounselor = ""
+                    counselor_hobby = ""
+                    counselor_word = ""
+                    selectCounselor_name = ""
+                    binding.counselorWeek.text = ""
+                    binding.counselorName.text = ""
+                    binding.counselorHobby.text = ""
+                    binding.counselorOneWord.text = ""
                 }else{
+                    var work = arrayListOf<Boolean>(false,false,false,false,false,false,false)
+                    var cnt = 0
+                    var Text = ""
+                    for (i in clickedText.work){
+                        if(i["boolean"] as Boolean){
+                            Text += weekList[cnt]
+                        }
+                        cnt +=1
+                    }
                     selectCounselor = clickedText.CounselorID
+                    counselor_hobby = clickedText.Testes
+                    counselor_word = clickedText.word
+                    selectCounselor_name = clickedText.CounselorName
+                    binding.counselorWeek.text = Text
+                    binding.counselorName.text = clickedText.CounselorName
+                    binding.counselorHobby.text = clickedText.Testes
+                    binding.counselorOneWord.text = clickedText.word
                 }
 
-                //選択されたリストのID
-                Toast.makeText(activity,"${clickedText.CounselorName}で絞り込みます", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -218,12 +250,49 @@ class ReservationFragment : Fragment() {
             @SuppressLint("NotifyDataSetChanged")
             override fun onItemClickListener(view: View, position: Int, clickedText: Schedule_Data) {
                 SELECT_COUNSELOR = clickedText.Select_Counselor
+                SELECT_COUNSELOR_NAME = selectCounselor_name
                 SELECT_DATE = Select_Date + clickedText.Time
+                SELECT_COUNSELOR_HOBBY = counselor_hobby
+                SELECT_COUNSELOR_WORD = counselor_word
                 Select_Date_Text += clickedText.Time_Only
                 SELECT_DATE_TEXT = Select_Date_Text
                 findNavController().navigate(ecc.ie3a.suitou.ecounsel.R.id.action_reservationFragment_to_reservationconfFragment)
             }
         })
+
+        //更新ボタンが押された時
+        binding.updateButton.setOnClickListener {
+
+            binding.calendarView.visibility = android.widget.CalendarView.INVISIBLE
+            binding.linearLayoutIntroduction.visibility = LinearLayout.INVISIBLE
+            binding.CounselorView.visibility = LinearLayout.INVISIBLE
+            binding.progressBar3.visibility = ProgressBar.VISIBLE
+            ListView.clear()
+            ReservationData.clear()
+            //Firebaseに接続し、カウンセラーの情報を取得する
+            db.collection("counselor").whereEqualTo("group","wyKJsGPFwUEjaVIuNfap").get().addOnSuccessListener {
+                for (i in it){
+                    var setList = Counselor_Data(i.id, i.data["name"] as String,i.data["group"] as String,i.data["tastes"] as String,i.data["word"] as String,i.data["work"] as ArrayList<Map<String, *>>)
+                    ListView.add(setList)
+                    adapter.notifyDataSetChanged()
+                }
+                //Firebaseに接続し、予約表の情報を取得する
+                db.collection("reservation").whereEqualTo("group","wyKJsGPFwUEjaVIuNfap").get().addOnSuccessListener {
+                    for (i in it){
+                        var setList = Reservation_Data(i.id,i.data["counselor"]as String,i.data["timestamp"] as String)
+                        ReservationData.add(setList)
+                    }
+                    binding.progressBar3.visibility = android.widget.ProgressBar.INVISIBLE
+                    binding.CounselorView.visibility = android.widget.ListView.VISIBLE
+                    binding.linearLayoutIntroduction.visibility = LinearLayout.VISIBLE
+                    binding.calendarView.visibility = android.widget.CalendarView.VISIBLE
+                }.addOnFailureListener {
+                    Toast.makeText(activity,"データベース接続に失敗しました。", Toast.LENGTH_SHORT).show()
+                }
+            }.addOnFailureListener {
+                Toast.makeText(activity,"データベース接続に失敗しました。", Toast.LENGTH_SHORT).show()
+            }
+        }
 
 
         return view
