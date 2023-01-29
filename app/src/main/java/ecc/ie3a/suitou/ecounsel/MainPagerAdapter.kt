@@ -12,16 +12,16 @@ var fragmentselect=0
 class MainPagerAdapter (fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle){
 
     override fun getItemCount(): Int {
-        return 4
+        return 3
     }
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             //どのFragmentを表示するか
-            0 -> ReservationTabFragment()
-            1 -> ReservationStatusFragment()
+            0 -> ReservationStatusFragment()
+            1 -> ReservationTabFragment()
             2 -> ProfileTabFragment()
-            3 -> ChatFragment()
+//            3 -> ChatFragment()
             else -> ReservationStatusFragment()
         }
     }

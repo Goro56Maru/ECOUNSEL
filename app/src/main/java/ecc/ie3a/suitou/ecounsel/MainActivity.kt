@@ -10,7 +10,7 @@ import ecc.ie3a.suitou.ecounsel.chat.ChatFragment
 import ecc.ie3a.suitou.ecounsel.databinding.ActivityMainBinding
 import ecc.ie3a.suitou.ecounsel.reservation_status.ReservationStatusFragment
 
-val TabArray = arrayOf("予約","予約状況","マイページ","チャット")
+val TabArray = arrayOf("予約状況","予約","マイページ")
 
 
 class MainActivity : AppCompatActivity() {
