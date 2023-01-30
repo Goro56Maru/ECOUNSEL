@@ -1,5 +1,6 @@
 package ecc.ie3a.suitou.ecounsel.reservation_status
 
+import android.app.AlertDialog
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -66,6 +68,7 @@ class ReservationStatusFragment : Fragment() {
         binding.otherComment.visibility = android.widget.TextView.INVISIBLE
         binding.dayText.visibility = android.widget.TextView.INVISIBLE
         binding.counselText2.visibility = android.widget.TextView.INVISIBLE
+        binding.deleteButton.visibility = android.widget.Button.INVISIBLE
 
         //ログインユーザの情報の取得
         auth = Firebase.auth
@@ -74,6 +77,8 @@ class ReservationStatusFragment : Fragment() {
 
         if (currentUser != null) uid = currentUser.uid
         else uid = ""
+
+        var reserv_id = ""
 
         binding.counselorText.text = "現在の予約はありません"
         ReservationData.clear()
@@ -103,13 +108,17 @@ class ReservationStatusFragment : Fragment() {
                     val month = calendar.get(Calendar.MONTH)
                     val dayOfMonth = calendar.get(Calendar.DATE)
                     val select_week = calendar.get(Calendar.DAY_OF_WEEK) - 1
-                    val text_date = "${year}年 ${month+1}月 ${dayOfMonth}日 ${weekList[select_week]} "
+                    val df = SimpleDateFormat("HH:mm")
+                    val time = df.format(i.TimeStamp)
+                    Log.d("TAG", "${calendar}")
+                    val text_date = "${year}年 ${month+1}月 ${dayOfMonth}日 ${weekList[select_week]} $time"
                     db.collection("counselor").document(i.CounselorID).get().addOnSuccessListener { it ->
                         val df = SimpleDateFormat("yyyy年 MM月 dd日 HH:mm")
                         binding.counselorText.text = "担当者：" + it["name"] as String
                         binding.day.text = text_date
                         binding.consaltation.text = i.consaltation
                         binding.otherComment.text = i.remarks
+                        reserv_id = i.ID
 
                         binding.infoText.visibility = LinearLayout.VISIBLE
                         binding.day.visibility = android.widget.TextView.VISIBLE
@@ -117,6 +126,7 @@ class ReservationStatusFragment : Fragment() {
                         binding.otherComment.visibility = android.widget.TextView.VISIBLE
                         binding.dayText.visibility = android.widget.TextView.VISIBLE
                         binding.counselText2.visibility = android.widget.TextView.VISIBLE
+                        binding.deleteButton.visibility = android.widget.Button.VISIBLE
                     }.addOnFailureListener {
 
                     }
@@ -133,6 +143,8 @@ class ReservationStatusFragment : Fragment() {
             binding.otherComment.visibility = android.widget.TextView.INVISIBLE
             binding.dayText.visibility = android.widget.TextView.INVISIBLE
             binding.counselText2.visibility = android.widget.TextView.INVISIBLE
+            binding.deleteButton.visibility = android.widget.Button.INVISIBLE
+
 
             binding.counselorText.text = "現在の予約はありません"
             ReservationData.clear()
@@ -162,13 +174,17 @@ class ReservationStatusFragment : Fragment() {
                         val month = calendar.get(Calendar.MONTH)
                         val dayOfMonth = calendar.get(Calendar.DATE)
                         val select_week = calendar.get(Calendar.DAY_OF_WEEK) - 1
-                        val text_date = "${year}年 ${month+1}月 ${dayOfMonth}日 ${weekList[select_week]} "
+                        val df = SimpleDateFormat("HH:mm")
+                        val time = df.format(i.TimeStamp)
+                        Log.d("TAG", "${calendar}")
+                        val text_date = "${year}年 ${month+1}月 ${dayOfMonth}日 ${weekList[select_week]} $time"
                         db.collection("counselor").document(i.CounselorID).get().addOnSuccessListener { it ->
                             val df = SimpleDateFormat("yyyy年 MM月 dd日 HH:mm")
                             binding.counselorText.text = "担当者：" + it["name"] as String
                             binding.day.text = text_date
                             binding.consaltation.text = i.consaltation
                             binding.otherComment.text = i.remarks
+                            reserv_id = i.ID
 
                             binding.day.visibility = android.widget.TextView.VISIBLE
                             binding.infoText.visibility = LinearLayout.VISIBLE
@@ -176,6 +192,7 @@ class ReservationStatusFragment : Fragment() {
                             binding.otherComment.visibility = android.widget.TextView.VISIBLE
                             binding.dayText.visibility = android.widget.TextView.VISIBLE
                             binding.counselText2.visibility = android.widget.TextView.VISIBLE
+                            binding.deleteButton.visibility = android.widget.Button.VISIBLE
                         }.addOnFailureListener {
 
                         }
@@ -184,6 +201,85 @@ class ReservationStatusFragment : Fragment() {
                 }
                 binding.infoText.visibility = LinearLayout.VISIBLE
             }
+        }
+
+        binding.deleteButton.setOnClickListener {
+            AlertDialog.Builder(context) // FragmentではActivityを取得して生成
+                .setTitle("予約取り消し")
+                .setMessage("予約を取り消します\n本当によろしいですか？")
+                .setPositiveButton("Ok") { dialog, which ->
+                    db.collection("reservation").document(reserv_id).delete()
+                        .addOnSuccessListener {
+                            Toast.makeText(activity, "予約を取り消しました。", Toast.LENGTH_SHORT).show()
+                            binding.infoText.visibility = LinearLayout.INVISIBLE
+                            binding.day.visibility = android.widget.TextView.INVISIBLE
+                            binding.consaltation.visibility = android.widget.TextView.INVISIBLE
+                            binding.otherComment.visibility = android.widget.TextView.INVISIBLE
+                            binding.dayText.visibility = android.widget.TextView.INVISIBLE
+                            binding.counselText2.visibility = android.widget.TextView.INVISIBLE
+                            binding.deleteButton.visibility = android.widget.Button.INVISIBLE
+
+
+                            binding.counselorText.text = "現在の予約はありません"
+                            ReservationData.clear()
+                            db.collection("reservation").whereEqualTo("subscriber",uid).get().addOnSuccessListener {
+                                for (i in it){
+                                    val df = SimpleDateFormat("yyyy/MM/dd/HH:mm")
+                                    val date_str = i.data["timestamp"]as String
+                                    val dt = df.parse(date_str)
+                                    var setList = Reservation_Status_Data(i.id,i.data["counselor"]as String,dt,i.data["consaltation"]as String,i.data["remarks"]as String)
+                                    ReservationData.add(setList)
+                                }
+                                ReservationData.sortBy { it.TimeStamp }
+                                Log.d("TAG", "結果")
+                                Log.d("TAG", "$ReservationData")
+                                val localDateTime = LocalDateTime.now()
+                                val date = Date()
+                                for (i in ReservationData){
+                                    Log.d("TAG", "とおてるよ")
+                                    Log.d("TAG", "${i.TimeStamp}")
+                                    Log.d("TAG", "$date")
+                                    if (date.before(i.TimeStamp) ){
+                                        var weekList = arrayListOf<String>("(日)","(月)","(火)","(水)","(木)","(金)","(土)")
+                                        Log.d("TAG", "とおてるよ")
+                                        val calendar: Calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tokyo"), Locale.JAPAN)
+                                        calendar.time = i.TimeStamp
+                                        val year = calendar.get(Calendar.YEAR)
+                                        val month = calendar.get(Calendar.MONTH)
+                                        val dayOfMonth = calendar.get(Calendar.DATE)
+                                        val select_week = calendar.get(Calendar.DAY_OF_WEEK) - 1
+                                        val df = SimpleDateFormat("HH:mm")
+                                        val time = df.format(i.TimeStamp)
+                                        Log.d("TAG", "${calendar}")
+                                        val text_date = "${year}年 ${month+1}月 ${dayOfMonth}日 ${weekList[select_week]} $time"
+                                        db.collection("counselor").document(i.CounselorID).get().addOnSuccessListener { it ->
+                                            val df = SimpleDateFormat("yyyy年 MM月 dd日 HH:mm")
+                                            binding.counselorText.text = "担当者：" + it["name"] as String
+                                            binding.day.text = text_date
+                                            binding.consaltation.text = i.consaltation
+                                            binding.otherComment.text = i.remarks
+                                            reserv_id = i.ID
+
+                                            binding.day.visibility = android.widget.TextView.VISIBLE
+                                            binding.infoText.visibility = LinearLayout.VISIBLE
+                                            binding.consaltation.visibility = android.widget.TextView.VISIBLE
+                                            binding.otherComment.visibility = android.widget.TextView.VISIBLE
+                                            binding.dayText.visibility = android.widget.TextView.VISIBLE
+                                            binding.counselText2.visibility = android.widget.TextView.VISIBLE
+                                            binding.deleteButton.visibility = android.widget.Button.VISIBLE
+                                        }.addOnFailureListener {
+
+                                        }
+                                        break
+                                    }
+                                }
+                                binding.infoText.visibility = LinearLayout.VISIBLE
+                            }
+                        }
+                }
+                .setNegativeButton("No") { dialog, which ->
+                }
+                .show()
         }
         return view
     }

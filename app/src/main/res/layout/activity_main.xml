@@ -10,9 +10,12 @@
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="#4A4A4A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabIconTint="@color/ic_launcher_background"
+        app:tabTextColor="#FFFFFF">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

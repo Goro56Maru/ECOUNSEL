@@ -76,7 +76,10 @@ class SelectActivity : AppCompatActivity() {
                     val month = calendar.get(Calendar.MONTH)
                     val dayOfMonth = calendar.get(Calendar.DATE)
                     val select_week = calendar.get(Calendar.DAY_OF_WEEK) - 1
-                    val text_date = "${year}年 ${month+1}月 ${dayOfMonth}日 ${weekList[select_week]} "
+                    val df = SimpleDateFormat("HH:mm")
+                    val time = df.format(i.TimeStamp)
+                    Log.d("TAG", "${calendar}")
+                    val text_date = "${year}年 ${month+1}月 ${dayOfMonth}日 ${weekList[select_week]} $time"
                     binding.counselorText.text = text_date
 
                     break
@@ -115,7 +118,10 @@ class SelectActivity : AppCompatActivity() {
                         val month = calendar.get(Calendar.MONTH)
                         val dayOfMonth = calendar.get(Calendar.DATE)
                         val select_week = calendar.get(Calendar.DAY_OF_WEEK) - 1
-                        val text_date = "${year}年 ${month+1}月 ${dayOfMonth}日 ${weekList[select_week]} "
+                        val df = SimpleDateFormat("HH:mm")
+                        val time = df.format(i.TimeStamp)
+                        Log.d("TAG", "${calendar}")
+                        val text_date = "${year}年 ${month+1}月 ${dayOfMonth}日 ${weekList[select_week]} $time"
                         binding.counselorText.text = text_date
 
                         break

@@ -95,7 +95,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="現在の予約はありません"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="24sp"
@@ -264,6 +263,16 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:visibility="visible" />
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_marginEnd="30dp"
+                android:backgroundTint="#00BCD4"
+                android:text="予約を取り消す"
+                app:cornerRadius="5dp" />
 
         </LinearLayout>
     </ScrollView>
