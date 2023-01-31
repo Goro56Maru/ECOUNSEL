@@ -133,7 +133,8 @@ class ReservationConfFragment : Fragment() {
                     "counselor" to select_counselor,
                     "remarks" to comment,
                     "subscriber" to uid,
-                    "timestamp" to select_date
+                    "timestamp" to select_date,
+                    "group" to "wyKJsGPFwUEjaVIuNfap"
                 )
 
                 db.collection("reservation").add(reservation_data)

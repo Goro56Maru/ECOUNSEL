@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -120,6 +121,7 @@ class ReservationFragment : Fragment() {
                     var setList = Reservation_Data(i.id,i.data["counselor"]as String,i.data["timestamp"] as String)
                     ReservationData.add(setList)
                 }
+
                 binding.progressBar3.visibility = android.widget.ProgressBar.INVISIBLE
                 binding.CounselorView.visibility = android.widget.ListView.VISIBLE
                 binding.linearLayoutIntroduction.visibility = android.widget.LinearLayout.VISIBLE
@@ -171,8 +173,13 @@ class ReservationFragment : Fragment() {
                 for (i in timeList){
                     var str = date + i
                     var setList: Schedule_Data
+                    Log.d("TAG", "$str")
+                    Log.d("TAG", ReservationData.toString())
+
+
 //                Toast.makeText(activity,"$str", Toast.LENGTH_SHORT).show()
-                    if(ReservationData.any{ it.TimeStamp == str }){
+                    if(ReservationData.any{ it.TimeStamp == str}){
+                        Log.d("TAG", "とおってます")
                         setList = Schedule_Data(i, false, selectCounselor,i)
                     }
                     else{

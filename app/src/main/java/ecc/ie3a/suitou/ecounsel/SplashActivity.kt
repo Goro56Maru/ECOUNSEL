@@ -46,12 +46,12 @@ class SplashActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         if(user != null){
-            Toast.makeText(this,"ログイン成功！", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this,"ログイン成功！", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this,SelectActivity::class.java))
             finish()
         }else{
             signOut()
-//          Toast.makeText(this,"ログイン失敗！", Toast.LENGTH_SHORT).show()
+          Toast.makeText(this,"ログインに失敗しました", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
