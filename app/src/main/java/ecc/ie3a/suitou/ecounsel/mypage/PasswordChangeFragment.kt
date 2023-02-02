@@ -1,11 +1,16 @@
 package ecc.ie3a.suitou.ecounsel.mypage
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import ecc.ie3a.suitou.ecounsel.R
 import ecc.ie3a.suitou.ecounsel.databinding.FragmentMailChangeBinding
 import ecc.ie3a.suitou.ecounsel.databinding.FragmentNameChangeBinding
@@ -21,15 +26,21 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PasswordChangeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-
-
 //追加　
 private lateinit var binding: FragmentPasswordChangeBinding
 
+
 class PasswordChangeFragment : Fragment() {
+
+    private var _binding: FragmentPasswordChangeBinding? = null
+    private val binding get() = _binding!!
+    private var pass = ""
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +57,24 @@ class PasswordChangeFragment : Fragment() {
     ): View? {
 
         //遷移追加
-        binding = FragmentPasswordChangeBinding.inflate(layoutInflater)
+        _binding = FragmentPasswordChangeBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        auth = Firebase.auth
+        val user = auth.currentUser
+
+        binding.nbutton.setOnClickListener {
+            pass = binding.userpassEdit.text.toString()
+            user!!.updatePassword(pass)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "User password updated.")
+                    }
+                }
+        }
+
+
+
 
 
         binding.passBackbutton.setOnClickListener{
